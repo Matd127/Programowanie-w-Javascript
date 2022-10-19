@@ -1,22 +1,71 @@
-#slider {
-    width: 600px;
-    height: 400px;
-    margin: 100px auto 0 auto;
-    overflow: hidden;
+*{
+    padding: 0px;
+    margin: 0;
+    box-sizing: border-box;
 }
-#slider .slides {
-    display: flex;
-    animation-name: pociag-w-lewo;
-    animation-duration: 4s;
-    animation-delay: 1s;
-    animation-timing-function: ease-in-out;
+h1{
+    text-align: center;
 }
 
-@keyframes pociag-w-lewo {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-600px);
-    }
+.slides-container{
+    width: 600px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.slides-slide{
+    display: flex;
+    width: 600px;
+    height: 400px;
+}
+
+.slides-container img{
+    width: 600px;
+    height: 400px;
+}
+
+
+.next-btn,
+.prev-btn{
+    background: #eee;
+    padding: 16px;
+    position: absolute;
+    top: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    transform: translateY(-50%);
+    z-index: 100;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.next-btn:hover,
+.prev-btn:hover{
+    background: #48f9ff;
+}
+
+.prev-btn{
+    left: 0;
+}
+
+.next-btn{
+    right: 0;
+}
+
+.navigation-dots{
+    display: flex;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.single-dot{
+    background-color: #333;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 400ms;
 }

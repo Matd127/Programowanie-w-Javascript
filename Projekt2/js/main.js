@@ -1,24 +1,41 @@
-// notatnik z zajęć
-const main = document.querySelector('main')
-const timeoutRef = setTimeout( 
-    () => {
-        main.innerHTML='From setTimeout'
-    },
-    2000
-)
-let licznik = 0 
-const intervalRef = setInterval( 
-    () => {
-        main.innerHTML='From interval' + licznik++
-    },
-    4000
-)
+const slide = document.querySelector(".slides-slide")
+const slideImages = document.querySelectorAll(".slides-slide img")
 
-// kasujemy setInterval
-clearInterval(intervalRef)
+const prevBtn = document.querySelector(".prev-btn")
+const nextBtn = document.querySelector(".next-btn")
 
-// kasujemy setTimeout
-clearTimeout(intervalRef)
+const navigationDots = document.querySelectorAll(".navigation-dots .single-dot")
 
+let counter = 0;
+const size = slideImages[0].clientWidth
 
-// window.requestAnimationFrame
+nextBtn.addEventListener('click', () => {
+    slide.style.transition = "transform 0.4s ease-in-out"
+    counter++;
+    if(counter > 2){
+        counter = 0
+        slide.style.transition = "transform 0.4s ease-in-out"
+        slide.style.transform = 'translateX(' + (-600 * counter) + 'px)'
+    }
+    slide.style.transform = 'translateX(' + (-600 * counter) + 'px)'
+})
+
+prevBtn.addEventListener('click', () => {
+    slide.style.transition = "transform 0.4s ease-in-out"
+    counter--;
+    if(counter < 0){
+        counter = 2
+        slide.style.transition = "transform 0.4s ease-in-out"
+        slide.style.transform = 'translateX(' + (-600 * counter) + 'px)'
+    }
+    slide.style.transform = 'translateX(' + (-600 * counter) + 'px)'
+})
+
+for(let i = 0; i < navigationDots.length; i++){
+    navigationDots[i].addEventListener("click", () => {
+        counter = i;
+        slide.style.transition = "transform 0.4s ease-in-out"
+        slide.style.transform = 'translateX(' + (-600 * counter) + 'px)'
+    })
+}
+
