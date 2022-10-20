@@ -10,6 +10,7 @@ const navigationDots = document.querySelectorAll(
 );
 
 let counter = 0;
+let state = "start";
 const size = slideImages[0].clientWidth;
 
 nextBtn.addEventListener("click", () => {
@@ -58,13 +59,21 @@ const intervalRef = setInterval(moveSlide, 1000);
 
 for (let i = 0; i < slideImages.length; i++) {
   slideImages[i].addEventListener("mouseover", () => {
-    console.log("Stop");
-    clearInterval(intervalRef);
+    if(state === "start"){
+        state = "stop"
+        console.log("Stop");
+        clearInterval(intervalRef);
+    }
+    
   });
 }
+
 for (let i = 0; i < slideImages.length; i++) {
-  slideImages[i].addEventListener("mouseout", () => {
-    console.log("Start");
-    setInterval(moveSlide, 1000);
-  });
-}
+   slideImages[i].addEventListener("mouseout", () => {
+    if(state === "stop"){
+        state = "start"
+        console.log("Start");
+        setInterval(moveSlide, 1000);
+    }
+   });
+ }
