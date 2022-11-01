@@ -1,14 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>Drumkit</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="drumkit__container">
+        <h1>Drumkit</h1>
+        <div class="drumkit__buttons">
+            <div data-key="49" class="tune">
+                <span class="title">Boom</span>
+                <span>[1]</span>
+            </div>
+            <div data-key="50" class="tune">
+                <span class="title">Clap</span>
+                <span>[2]</span>
+            </div>
+            <div data-key="51" class="tune">
+                <span class="title">Hihat</span> 
+                <span>[3]</span>
+            </div>
+            <div data-key="52" class="tune">
+               <span class="title">Kick</span>
+               <span>[4]</span>
+            </div>
+            <div data-key="53" class="tune">
+                <span class="title">Openhat</span>
+                <span>[5]</span>
+            </div>
+            <div data-key="54" class="tune">
+                <span class="title">Ride</span> 
+                <span>[6]</span>
+            </div>
+            <div data-key="55" class="tune">
+                <span class="title">Snare</span>
+                <span>[7]</span>
+            </div>
+            <div data-key="56" class="tune">
+                <span class="title">Tink</span>
+                <span>[8]</span>
+            </div>
+            <div data-key="57" class="tune">
+                <span class="title">Tom</span>
+                <span>[9]</span>
+            </div>
+        </div>
+    </div>
+    <audio data-key="49" src="./sounds/boom.wav" id="boom"></audio>
+    <audio data-key="50" src="./sounds/clap.wav"  id="clap"></audio>
+    <audio data-key="51" src="./sounds/hihat.wav"  id="hihat"></audio>
+    <audio data-key="52" src="./sounds/kick.wav"  id="kick"></audio>
+    <audio data-key="53" src="./sounds/openhat.wav"  id="openhat"></audio>
+    <audio data-key="54" src="./sounds/ride.wav"  id="ride"></audio>
+    <audio data-key="55" src="./sounds/snare.wav"  id="snare"></audio>
+    <audio data-key="56" src="./sounds/tink.wav"  id="tink"></audio>
+    <audio data-key="57" src="./sounds/tom.wav"  id="tom"></audio>
 
-<audio src="./sounds/clap.wav" controls id="clap"></audio>    
-<script src="drumkit.js"></script>
-</body>
+    <script src="drumkit.js"></script>
+  </body>
 </html>
