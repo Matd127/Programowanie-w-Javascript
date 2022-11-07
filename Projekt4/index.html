@@ -9,18 +9,23 @@
 </head>
 <body>
 
-    <div class="form">
-        <form>
-            <input type="text" name="title" placeholder="Tytul">
-            <textarea placeholder="Tresc"></textarea>
-            <input type="radio" name="color" id="yellow">Źółty
-            <input type="radio" name="color" id="green">Zielony
+    <button class="add-note">Dodaj notatkę</button>
 
-            <button id="submit">Kliknij mnie</button>
+    <div class="form hidden">
+        <form>
+            <h1>Nowa notatka</h1>
+            <input type="text" name="title" placeholder="Tytuł notatki">
+            <textarea placeholder="Treść notatki"></textarea>
+            <span><input type="radio" name="color" id="red">Czerwony</span>
+            <span><input type="radio" name="color" id="blue">Niebieski</span>
+            <span><input type="radio" name="color" id="green">Zielony</span>
+            <span><input type="radio" name="color" id="yellow">Żółty</span>
+            <button id="submit">Dodaj notatkę</button>
         </form>
     </div>
+    <div class="overlay hidden"></div>
 
     
-<script src="app.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

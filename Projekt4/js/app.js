@@ -8,6 +8,9 @@ const Note = {
 const notes = [];
 
 const addNote = document.querySelector("#submit")
+const btnShowForm = document.querySelector(".add-note")
+const form = document.querySelector('.form')
+const overlay = document.querySelector('.overlay')
 
 addNote.addEventListener("click", (event) => {
     const title = document.querySelector('input[name="title"]').value
@@ -25,3 +28,13 @@ addNote.addEventListener("click", (event) => {
     event.preventDefault();
 })
 
+const openForm = () => {
+    form.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+}
+const closeForm = () => {
+    form.classList.add('hidden');
+    overlay.classList.add('hidden');
+}
+btnShowForm.addEventListener('click', openForm)
+overlay.addEventListener('click', closeForm)
