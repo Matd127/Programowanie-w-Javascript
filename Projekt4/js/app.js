@@ -1,31 +1,3 @@
-class Note {
-  constructor(id, title, content, color, pin, dateOfCreation, tags) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.color = color;
-    this.pin = pin;
-    this.dateOfCreation = dateOfCreation;
-    this.tags = tags;
-  }
-}
-
-class Tag {
-  constructor(id, name) {
-    this.id = id;
-    this.name = name;
-  }
-}
-
-let notes = [];
-const addNote = document.querySelector("#submit");
-const btnShowForm = document.querySelector(".add-note");
-const form = document.querySelector(".form");
-const overlay = document.querySelector(".overlay");
-const editOverlay = document.querySelector(".edit-overlay");
-const notesList = document.querySelector(".notes-list");
-const editForm = document.querySelector(".edit-form");
-
 const loadNotes = () => {
   const jsonNotes = JSON.parse(window.localStorage.getItem("notes"));
   jsonNotes ? (notes = [...jsonNotes]) : console.log("Brak notatek");
@@ -61,22 +33,36 @@ const displayAndManageNotes = () => {
     });
   }
 
+  const loadValuesToForm = (singleNote) => {
+    editForm.querySelector('input[name="title"]').value = singleNote.title;
+    editForm.querySelector("textarea").value = singleNote.content;
+    editForm.querySelector(`input[id=${singleNote.color}]`).checked = true;
+  };
+
   const btnEdit = document.querySelectorAll(".edit-button");
+  let index;
   for (let i = 0; i < btnEdit.length; i++) {
     btnEdit[i].addEventListener("click", () => {
       toggleEditForm();
       const singleNote = notes.find((obj) => obj.id === Number(btnEdit[i].id));
-      console.log(editForm);
-      editForm.querySelector('input[name="title"]').value = singleNote.title;
-      editForm.querySelector("textarea").value = singleNote.content;
-      //select radio button by color
-      //edit note
+      index = notes.findIndex((obj) => obj.id === Number(btnEdit[i].id));
+      loadValuesToForm(singleNote);
     });
   }
+
+  const editNote = document.querySelector(".edit-note");
+  editNote.addEventListener("click", () => {
+    notes[index].title = editForm.querySelector('input[name="title"]').value;
+    notes[index].content = editForm.querySelector("textarea").value;
+    notes[index].color = editForm.querySelector(
+      'input[name="color"]:checked'
+    ).id;
+    localStorage.setItem("notes", JSON.stringify(notes));
+  });
 };
 displayAndManageNotes();
 
-addNote.addEventListener("click", (e) => {
+addNote.addEventListener("click", () => {
   const title = document.querySelector('input[name="title"]').value;
   const content = document.querySelector("textarea").value;
   const color = document.querySelector('input[name="color"]:checked').id;
