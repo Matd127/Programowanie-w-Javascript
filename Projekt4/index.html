@@ -12,19 +12,27 @@
       <div class="left-menu">
         <div class="left-menu__content">
           <button class="add-note">+ Dodaj notatkę</button>
+          <button class="add-tag hidden">+ Dodaj tag</button>
           <div class="left-menu__options">
-            <div class="left-menu__option">Notatki </div>
-            <div class="left-menu__option">Tagi </div>
+            <div class="left-menu__option" id="notes">Notatki</div>
+            <div class="left-menu__option" id="tags">Tagi</div>
           </div>
         </div>
       </div>
       <div class="notes-list"></div>
+      <div class="tags-list hidden">#Jakis tag1</div>
 
       <div class="form hidden">
         <form>
           <h1>Nowa notatka</h1>
           <input type="text" name="title" placeholder="Tytuł notatki" />
           <textarea placeholder="Treść notatki"></textarea>
+          <select>
+            <option>a</option>
+            <option>ab</option>
+            <option>cc</option>
+            <option>d</option>
+          </select>
           <span><input type="radio" name="color" id="red" />Czerwony</span>
           <span><input type="radio" name="color" id="blue" />Niebieski</span>
           <span><input type="radio" name="color" id="green" />Zielony</span>
@@ -38,20 +46,25 @@
           <h1>Edycja notatki</h1>
           <input type="text" name="title" placeholder="Tytuł notatki" />
           <textarea placeholder="Treść notatki"></textarea>
-          <span><input type="radio" name="color" id="red" />Czerwony</span>
-          <span><input type="radio" name="color" id="blue" />Niebieski</span>
-          <span><input type="radio" name="color" id="green" />Zielony</span>
-          <span><input type="radio" name="color" id="yellow" />Żółty</span>
-          <button id="submit" class="edit-note">Edytuj notatkę</button>
+          <span>
+            <input type="radio" name="color" id="red-color" />Czerwony</span
+          >
+          <span>
+            <input type="radio" name="color" id="blue-color" />Niebieski
+          </span>
+          <span>
+            <input type="radio" name="color" id="green-color" />Zielony
+          </span>
+          <span>
+            <input type="radio" name="color" id="yellow-color" />Żółty</span
+          >
+          <button class="edit-note">Edytuj notatkę</button>
         </form>
       </div>
-
-
-
     </div>
     <div class="edit-overlay hidden"></div>
     <div class="overlay hidden"></div>
-    
+
     <script src="js/note.js"></script>
     <script src="js/tag.js"></script>
     <script src="js/init.js"></script>

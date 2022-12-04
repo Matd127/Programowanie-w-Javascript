@@ -47,7 +47,7 @@ body {
   cursor: pointer;
 }
 
-.add-note, .edit-note {
+.add-note, .add-tag, .edit-note {
   box-shadow: inset 0px 1px 0px 0px #bbdaf7;
   background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
   background-color: #79bbff;
@@ -101,11 +101,19 @@ form {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .notes-list {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
 }

@@ -1,20 +1,15 @@
 const slide = document.querySelector(".slides-slide");
 const slideImages = document.querySelectorAll(".slides-slide img");
 const slideContainer = document.querySelector(".slides-container");
-
 const prevBtn = document.querySelector(".prev-btn");
 const nextBtn = document.querySelector(".next-btn");
-
 const navigationDots = document.querySelectorAll(
   ".navigation-dots .single-dot"
 );
-
 let counter = 0;
 let state = "start";
-const size = slideImages[0].clientWidth;
 
 nextBtn.addEventListener("click", () => {
-  slide.style.transition = "transform 0.4s ease-in-out";
   counter++;
   if (counter > 2) {
     counter = 0;
@@ -55,25 +50,16 @@ const moveSlide = () => {
   }
 };
 
-const intervalRef = setInterval(moveSlide, 1000);
-
+let intervalRef = setInterval(moveSlide, 2000);
 for (let i = 0; i < slideImages.length; i++) {
   slideImages[i].addEventListener("mouseover", () => {
-    if(state === "start"){
-        state = "stop"
-        console.log("Stop");
-        clearInterval(intervalRef);
-    }
-    
+    if (intervalRef) clearInterval(intervalRef);
+    intervalRef = undefined;
   });
 }
 
 for (let i = 0; i < slideImages.length; i++) {
-   slideImages[i].addEventListener("mouseout", () => {
-    if(state === "stop"){
-        state = "start"
-        console.log("Start");
-        setInterval(moveSlide, 1000);
-    }
-   });
- }
+  slideImages[i].addEventListener("mouseout", () => {
+    if (!intervalRef) intervalRef = setInterval(moveSlide, 2000);
+  });
+}

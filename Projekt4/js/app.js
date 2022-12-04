@@ -1,24 +1,26 @@
-const loadNotes = () => {
+const loadNotesAndTags = () => {
+  const jsonTags = JSON.parse(window.localStorage.getItem("tags"))
   const jsonNotes = JSON.parse(window.localStorage.getItem("notes"));
+  jsonTags ? (tags = [...jsonTags]) : console.log("Brak tagów");
   jsonNotes ? (notes = [...jsonNotes]) : console.log("Brak notatek");
 };
-loadNotes();
+loadNotesAndTags();
 
 const displayAndManageNotes = () => {
   notes &&
-    notes.map((obj) => {
+    notes.map((note) => {
       const newNote = document.createElement("div");
       newNote.classList.add("note");
-      newNote.classList.add("note-" + obj.color);
+      newNote.classList.add(`note-${note.color}`);
       newNote.innerHTML =
         "<div class='manage-icons'> <div class='edit-button' id=" +
-        obj.id +
+        note.id +
         "> 📜</div> <div class='delete-button' id=" +
-        obj.id +
+        note.id +
         ">&#10060;</div></div> <h1> " +
-        obj.title +
+        note.title +
         '</h1> <div class="content">' +
-        obj.content +
+        note.content +
         "</div> ";
       notesList.appendChild(newNote);
     });
@@ -26,7 +28,7 @@ const displayAndManageNotes = () => {
   const btnDelete = document.querySelectorAll(".delete-button");
   for (let i = 0; i < btnDelete.length; i++) {
     btnDelete[i].addEventListener("click", () => {
-      notes = notes.filter((obj) => obj.id !== Number(btnDelete[i].id));
+      notes = notes.filter((note) => note.id !== Number(btnDelete[i].id));
       localStorage.setItem("notes", JSON.stringify(notes));
       alert("Usunieto notatkę!");
       location.reload();
@@ -36,7 +38,9 @@ const displayAndManageNotes = () => {
   const loadValuesToForm = (singleNote) => {
     editForm.querySelector('input[name="title"]').value = singleNote.title;
     editForm.querySelector("textarea").value = singleNote.content;
-    editForm.querySelector(`input[id=${singleNote.color}]`).checked = true;
+    editForm.querySelector(
+      `input[id=${singleNote.color}-color]`
+    ).checked = true;
   };
 
   const btnEdit = document.querySelectorAll(".edit-button");
@@ -44,8 +48,8 @@ const displayAndManageNotes = () => {
   for (let i = 0; i < btnEdit.length; i++) {
     btnEdit[i].addEventListener("click", () => {
       toggleEditForm();
-      const singleNote = notes.find((obj) => obj.id === Number(btnEdit[i].id));
-      index = notes.findIndex((obj) => obj.id === Number(btnEdit[i].id));
+      const singleNote = notes.find((note) => note.id === Number(btnEdit[i].id));
+      index = notes.findIndex((note) => note.id === Number(btnEdit[i].id));
       loadValuesToForm(singleNote);
     });
   }
@@ -84,6 +88,22 @@ const toggleForm = () => {
   overlay.classList.toggle("hidden");
 };
 
+const showTags = () => {
+  notesList.classList.add("hidden");
+  addNoteBtn.classList.add("hidden");
+  tagsList.classList.remove("hidden");
+  addTagBtn.classList.remove("hidden");
+
+}
+const showNotes = () => {
+  tagsList.classList.add("hidden");
+  addTagBtn.classList.add("hidden");
+  addNoteBtn.classList.remove("hidden");
+  notesList.classList.remove("hidden");
+}
+
+tagsMenu.addEventListener("click", showTags);
+notesMenu.addEventListener("click", showNotes);
 btnShowForm.addEventListener("click", toggleForm);
 overlay.addEventListener("click", toggleForm);
 editOverlay.addEventListener("click", toggleEditForm);
