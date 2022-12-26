@@ -127,20 +127,21 @@ form {
   width: 10em;
   padding: 1em;
   position: relative;
+  border-radius: 5px;
 }
 
-.note-yellow {
+.yellow {
   background: #ffc;
 }
 
-.note-red {
+.red {
   background: rgb(252, 145, 145);
 }
 
-.note-blue {
+.blue {
   background: rgb(149, 201, 250);
 }
 
-.note-green {
+.green {
   background: rgb(206, 255, 204);
 }

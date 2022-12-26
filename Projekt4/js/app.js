@@ -1,82 +1,73 @@
-const loadNotesAndTags = () => {
-  const jsonTags = JSON.parse(window.localStorage.getItem("tags"))
+const loadNotes = () => {
   const jsonNotes = JSON.parse(window.localStorage.getItem("notes"));
-  jsonTags ? (tags = [...jsonTags]) : console.log("Brak tagów");
   jsonNotes ? (notes = [...jsonNotes]) : console.log("Brak notatek");
 };
-loadNotesAndTags();
+loadNotes();
 
-const displayAndManageNotes = () => {
-  notes &&
-    notes.map((note) => {
-      const newNote = document.createElement("div");
-      newNote.classList.add("note");
-      newNote.classList.add(`note-${note.color}`);
-      newNote.innerHTML =
-        "<div class='manage-icons'> <div class='edit-button' id=" +
-        note.id +
-        "> 📜</div> <div class='delete-button' id=" +
-        note.id +
-        ">&#10060;</div></div> <h1> " +
-        note.title +
-        '</h1> <div class="content">' +
-        note.content +
-        "</div> ";
-      notesList.appendChild(newNote);
-    });
-
-  const btnDelete = document.querySelectorAll(".delete-button");
-  for (let i = 0; i < btnDelete.length; i++) {
-    btnDelete[i].addEventListener("click", () => {
-      notes = notes.filter((note) => note.id !== Number(btnDelete[i].id));
-      localStorage.setItem("notes", JSON.stringify(notes));
-      alert("Usunieto notatkę!");
-      location.reload();
-    });
-  }
-
-  const loadValuesToForm = (singleNote) => {
-    editForm.querySelector('input[name="title"]').value = singleNote.title;
-    editForm.querySelector("textarea").value = singleNote.content;
-    editForm.querySelector(`input[id=${singleNote.color}-color]`).checked = true;
-  };
-
-  const btnEdit = document.querySelectorAll(".edit-button");
-  let index;
-  for (let i = 0; i < btnEdit.length; i++) {
-    btnEdit[i].addEventListener("click", () => {
-      toggleEditForm();
-      const singleNote = notes.find((note) => note.id === Number(btnEdit[i].id));
-      index = notes.findIndex((note) => note.id === Number(btnEdit[i].id));
-      loadValuesToForm(singleNote);
-    });
-  }
-
-  const editNote = document.querySelector(".edit-note");
-  editNote.addEventListener("click", () => {
-    notes[index].title = editForm.querySelector('input[name="title"]').value;
-    notes[index].content = editForm.querySelector("textarea").value;
-    notes[index].color = editForm.querySelector(
-      'input[name="color"]:checked'
-    ).id;
-    console.log(notes[index].color);
-
-    localStorage.setItem("notes", JSON.stringify(notes));
+const displayNotes = (notes) => {
+  notesList.innerHTML = "";
+  notes.forEach((note) => {
+    const newNote = document.createElement("div");
+    newNote.classList.add("note");
+    newNote.style.backgroundColor = note.color;
+    newNote.innerHTML = `<div class='manage-icons'> 
+    <div class='edit-button' id=" ${note.id}">📜</div> 
+    <div class='delete-button' id="${note.id}">&#10060;</div> </div>
+    <h1>${note.title}</h1> 
+    <div class="content">${note.content} </div>`;
+    notesList.appendChild(newNote);
   });
 };
-displayAndManageNotes();
 
-addNote.addEventListener("click", () => {
-  const title = document.querySelector('input[name="title"]').value;
-  const content = document.querySelector("textarea").value;
-  const color = document.querySelector('input[name="color"]:checked').id;
-  const note = new Note(Date.now(), title, content, color, false, Date.now());
-  notes.push(note);
-  localStorage.setItem("notes", JSON.stringify(notes));
-  document.querySelector("form").reset();
-  toggleForm();
-  alert("Dodano notatkę!");
-});
+const manageNotes = () => {
+  displayNotes(notes);
+  addNote.addEventListener("click", (e) => {
+    e.preventDefault();
+    const title = document.querySelector('input[name="title"]').value;
+    const content = document.querySelector("textarea").value;
+    const color = document.querySelector('input[type="color"]').value;
+    const note = new Note(Date.now(), title, content, color, false, Date.now());
+    notes.push(note);
+    localStorage.setItem("notes", JSON.stringify(notes));
+    document.querySelector("form").reset();
+    toggleForm();
+    displayNotes(notes);
+  });
+
+  const btnDelete = document.querySelectorAll(".delete-button").forEach(function (btn) {
+      btn.addEventListener("click", () => {
+        notes = notes.filter((note) => note.id !== Number(btn.id));
+        localStorage.setItem("notes", JSON.stringify(notes));
+        displayNotes(notes);
+      });
+    });
+
+  const loadValuesToForm = (note) => {
+    editForm.querySelector('input[name="title"]').value = note.title;
+    editForm.querySelector("textarea").value = note.content;
+    editForm.querySelector(`input[type="color"]`).value = note.color;
+  };
+
+  const btnEdit = document.querySelectorAll(".edit-button").forEach(function (btn) {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleEditForm();
+        const singleNote = notes.find((note) => note.id === Number(btn.id));
+        loadValuesToForm(singleNote);
+        document.querySelector(".edit-note").addEventListener("click", () => {
+          editNote(singleNote);
+        });
+      });
+    });
+
+  const editNote = function (newNote) {
+    newNote.title = editForm.querySelector('input[name="title"]').value;
+    newNote.content = editForm.querySelector("textarea").value;
+    newNote.color = editForm.querySelector('input[type="color"]').value;
+    localStorage.setItem("notes", JSON.stringify(notes));
+  };
+};
+manageNotes();
 
 const toggleEditForm = () => {
   editForm.classList.toggle("hidden");
@@ -88,21 +79,11 @@ const toggleForm = () => {
   overlay.classList.toggle("hidden");
 };
 
-const showTags = () => {
-  notesList.classList.add("hidden");
-  addNoteBtn.classList.add("hidden");
-  tagsList.classList.remove("hidden");
-  addTagBtn.classList.remove("hidden");
-
-}
 const showNotes = () => {
-  tagsList.classList.add("hidden");
-  addTagBtn.classList.add("hidden");
   addNoteBtn.classList.remove("hidden");
   notesList.classList.remove("hidden");
-}
+};
 
-tagsMenu.addEventListener("click", showTags);
 notesMenu.addEventListener("click", showNotes);
 btnShowForm.addEventListener("click", toggleForm);
 overlay.addEventListener("click", toggleForm);

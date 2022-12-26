@@ -15,7 +15,6 @@
           <button class="add-tag hidden">+ Dodaj tag</button>
           <div class="left-menu__options">
             <div class="left-menu__option" id="notes">Notatki</div>
-            <div class="left-menu__option" id="tags">Tagi</div>
           </div>
         </div>
       </div>
@@ -26,10 +25,9 @@
           <h1>Nowa notatka</h1>
           <input type="text" name="title" placeholder="Tytuł notatki" />
           <textarea placeholder="Treść notatki"></textarea>
-          <span><input type="radio" name="color" id="red" />Czerwony</span>
-          <span><input type="radio" name="color" id="blue" />Niebieski</span>
-          <span><input type="radio" name="color" id="green" />Zielony</span>
-          <span><input type="radio" name="color" id="yellow" />Żółty</span>
+          <div>
+            Wybierz kolor: <input type="color" value="#e66465">
+          </div>
           <button id="submit" class="add-note">Dodaj notatkę</button>
         </form>
       </div>
@@ -39,18 +37,9 @@
           <h1>Edycja notatki</h1>
           <input type="text" name="title" placeholder="Tytuł notatki" />
           <textarea placeholder="Treść notatki"></textarea>
-          <span>
-            <input type="radio" name="color" id="red-color" />Czerwony</span
-          >
-          <span>
-            <input type="radio" name="color" id="blue-color" />Niebieski
-          </span>
-          <span>
-            <input type="radio" name="color" id="green-color" />Zielony
-          </span>
-          <span>
-            <input type="radio" name="color" id="yellow-color" />Żółty</span
-          >
+          <div>
+            Wybierz kolor: <input type="color" value="#e66465">
+          </div>
           <button class="edit-note">Edytuj notatkę</button>
         </form>
       </div>
