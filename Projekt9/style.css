@@ -1,0 +1,32 @@
+body{
+    background-color: rgb(76, 216, 255);
+    box-sizing: border-box;
+    margin: 0;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    background-color: rgba(41, 40, 40, 0.366);
+    color: rgb(255, 255, 255);
+}
+
+h1 {
+    padding: 15px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 15px;
+    overflow: hidden;
+}
+
+li{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  

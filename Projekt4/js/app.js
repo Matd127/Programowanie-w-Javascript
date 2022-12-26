@@ -38,9 +38,7 @@ const displayAndManageNotes = () => {
   const loadValuesToForm = (singleNote) => {
     editForm.querySelector('input[name="title"]').value = singleNote.title;
     editForm.querySelector("textarea").value = singleNote.content;
-    editForm.querySelector(
-      `input[id=${singleNote.color}-color]`
-    ).checked = true;
+    editForm.querySelector(`input[id=${singleNote.color}-color]`).checked = true;
   };
 
   const btnEdit = document.querySelectorAll(".edit-button");
@@ -61,6 +59,8 @@ const displayAndManageNotes = () => {
     notes[index].color = editForm.querySelector(
       'input[name="color"]:checked'
     ).id;
+    console.log(notes[index].color);
+
     localStorage.setItem("notes", JSON.stringify(notes));
   });
 };
