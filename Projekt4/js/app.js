@@ -14,7 +14,10 @@ const displayNotes = (notes) => {
     <div class='edit-button' id=" ${note.id}">📜</div> 
     <div class='delete-button' id="${note.id}">&#10060;</div> </div>
     <h1>${note.title}</h1> 
-    <div class="content">${note.content} </div>`;
+    <div class="content">
+    <div>Tagi: ${note.tags}</div>
+      ${note.content}
+    </div>`;
     notesList.appendChild(newNote);
   });
 };
@@ -26,12 +29,14 @@ const manageNotes = () => {
     const title = document.querySelector('input[name="title"]').value;
     const content = document.querySelector("textarea").value;
     const color = document.querySelector('input[type="color"]').value;
-    const note = new Note(Date.now(), title, content, color, false, Date.now());
+    const tags = (document.querySelector('input[name="tags"]').value).split(' ');
+    const note = new Note(Date.now(), title, content, color, false, tags, Date.now());
     notes.push(note);
     localStorage.setItem("notes", JSON.stringify(notes));
     document.querySelector("form").reset();
     toggleForm();
     displayNotes(notes);
+    manageNotes();
   });
 
   const btnDelete = document.querySelectorAll(".delete-button").forEach(function (btn) {
@@ -39,6 +44,7 @@ const manageNotes = () => {
         notes = notes.filter((note) => note.id !== Number(btn.id));
         localStorage.setItem("notes", JSON.stringify(notes));
         displayNotes(notes);
+        manageNotes();
       });
     });
 
@@ -56,6 +62,7 @@ const manageNotes = () => {
         loadValuesToForm(singleNote);
         document.querySelector(".edit-note").addEventListener("click", () => {
           editNote(singleNote);
+          manageNotes();
         });
       });
     });

@@ -8,7 +8,6 @@ const editOverlay = document.querySelector(".edit-overlay");
 const addNoteBtn = document.querySelector(".add-note");
 const addTagBtn = document.querySelector(".add-tag");
 const notesList = document.querySelector(".notes-list");
-const tagsList = document.querySelector(".tags-list");
 const editForm = document.querySelector(".edit-form");
 const tagsMenu = document.querySelector("#tags")
 const notesMenu = document.querySelector("#notes")
