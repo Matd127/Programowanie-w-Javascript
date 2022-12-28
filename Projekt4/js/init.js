@@ -9,5 +9,7 @@ const addNoteBtn = document.querySelector(".add-note");
 const addTagBtn = document.querySelector(".add-tag");
 const notesList = document.querySelector(".notes-list");
 const editForm = document.querySelector(".edit-form");
-const tagsMenu = document.querySelector("#tags")
-const notesMenu = document.querySelector("#notes")
+const noteSearch = document.querySelector(".note-search");
+const noteSearchTag = noteSearch.querySelector('input[type="text"]');
+const tagsMenu = document.querySelector("#tags");
+const notesMenu = document.querySelector("#notes");
