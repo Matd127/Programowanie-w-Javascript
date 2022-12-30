@@ -32,9 +32,8 @@ const displayNotes = (notes) => {
       <div class="note--tags">Tagi: ${note.tags} </div>
       ${note.content}
     </div>
-    <div class="note--date">Data utworzenia: ${returnDate(
-      new Date(note.dateOfCreation)
-    )} <div>`;
+    <div class="note--date">Data utworzenia: ${returnDate(new Date(note.dateOfCreation))}
+   <div>`;
 
     const notePin = newNote.querySelector(".pin-icon");
     newNote.querySelector(".delete-button").addEventListener("click", () => deleteNote(note.id));

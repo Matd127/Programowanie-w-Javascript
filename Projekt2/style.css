@@ -1,71 +1,130 @@
-*{
-    padding: 0px;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0px;
+  margin: 0;
+  box-sizing: border-box;
 }
-h1{
-    text-align: center;
-}
-
-.slides-container{
-    width: 600px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
+h1 {
+  text-align: center;
 }
 
-.slides-slide{
-    display: flex;
-    width: 600px;
-    height: 400px;
+.slides-container {
+  width: 600px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
 }
 
-.slides-container img{
-    width: 600px;
-    height: 400px;
+.slides-slide {
+  display: flex;
+  width: 600px;
+  height: 400px;
 }
 
+.slides-container img {
+  width: 600px;
+  height: 400px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animation-toggle_btn {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
 .next-btn,
-.prev-btn{
-    background: #eee;
-    padding: 16px;
-    position: absolute;
-    top: 50%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
-    transform: translateY(-50%);
-    z-index: 100;
-    cursor: pointer;
-    transition: 400ms;
+.prev-btn {
+  background: #eee;
+  padding: 16px;
+  position: absolute;
+  top: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%);
+  z-index: 100;
+  cursor: pointer;
+  transition: 400ms;
 }
 
 .next-btn:hover,
-.prev-btn:hover{
-    background: #48f9ff;
+.prev-btn:hover {
+  background: #48f9ff;
 }
 
-.prev-btn{
-    left: 0;
+.prev-btn {
+  left: 0;
 }
 
-.next-btn{
-    right: 0;
+.next-btn {
+  right: 0;
 }
 
-.navigation-dots{
-    display: flex;
-    height: 32px;
-    justify-content: center;
-    align-items: center;
-    margin: 16px 0;
+.navigation-dots {
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
 }
 
-.single-dot{
-    background-color: #333;
-    height: 16px;
-    width: 16px;
-    border: 2px solid #000;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 400ms;
+.single-dot {
+  background-color: #333;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.fade {
+  animation-name: fade;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.img_resized {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(71, 71, 71);
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 1001;
 }
