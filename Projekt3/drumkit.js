@@ -1,8 +1,15 @@
 document.addEventListener("keypress", onKeyPress);
+const tracks = document.querySelector('.tracks');
 const RECORDING_KEY = "82";
 const PLAYING_KEY = "80";
 let isPlaying = false;
 let isRecording = false;
+const records = [];
+const currentRecording = {
+  startTime: 0,
+  endTime: 0,
+  notes: [],
+};
 
 document.addEventListener("keydown", (e) => {
   let audio = document.querySelector(`audio[data-key='${e.keyCode}']`);
@@ -17,18 +24,6 @@ document.addEventListener("keydown", (e) => {
     }, 100);
   }
 });
-
-const records = [];
-const currentRecording = {
-  startTime: 0,
-  endTime: 0,
-  notes: [],
-};
-
-function recordingButtonPressed() {
-  changeRecordingStatus();
-  startRecording();
-}
 
 function startRecording() {
   currentRecording.notes = [];
@@ -50,14 +45,14 @@ function endRecording() {
     }
 
     records.push(recordingWithTimeStamps);
-    displayRecord();
+    displayRecord(records.length);
   }
 }
 
 function recordSound(sound) {
   currentRecording.notes.push([sound, Date.now()]);
-  // playSound(sound);
 }
+
 function onKeyPress(e) {
   const sound = document.querySelector(`audio[data-key='${e.keyCode}']`);
   if (sound != null && isRecording == true) {
@@ -65,21 +60,38 @@ function onKeyPress(e) {
   }
 }
 
-function displayRecord() {
+function displayRecord(record) {
   console.log(records);
+  const track = document.createElement('div');
+  track.classList.add()
+  console.log(record)
+  track.innerHTML = `<div>${record}</div> <div class='play'>▶</div>`
+
+  const playTrack = track.querySelector('.play').addEventListener('click', () => {
+    playRecord();
+  })
+  tracks.appendChild(track);
 }
 
 function recordingControl(event) {
   if (event.keyCode === Number(RECORDING_KEY)) {
     if (!isRecording) {
-      console.log("Start");
       isRecording = true;
       startRecording();
     } else {
       isRecording = false;
-      console.log("Stop");
       endRecording();
     }
+  }
+}
+
+function playRecord(){
+  for(const [record, timeout] of records.flat()){
+    console.log(record, timeout)
+    setTimeout(() => {
+      record.currentTime = 0;
+      record.play();
+    }, timeout);
   }
 }
 
