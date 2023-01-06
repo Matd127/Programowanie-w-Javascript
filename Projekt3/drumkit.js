@@ -2,6 +2,8 @@ document.addEventListener("keypress", onKeyPress);
 const tracks = document.querySelector('.tracks');
 const recordButton = document.querySelector('.drumkit__recordButton');
 const playButton = document.querySelector('.drumkit__playButton');
+const playSelectedTunes = document.querySelector('.play__track');
+
 const RECORDING_KEY = "82";
 const PLAYING_KEY = "80";
 const records = [];
@@ -96,19 +98,14 @@ function recordingControl(event) {
   }
 }
 
-// Play all
-
 function playRecord(){
   for(const [record, timeout] of records.flat()){
-    // console.log(record, timeout)
     setTimeout(() => {
       record.currentTime = 0;
       record.play();
     }, timeout);
   }
 }
-
-//Play one
 
 function playSingleRecord(selectedRecord) {
   const singleRecord = records[selectedRecord - 1]
@@ -125,4 +122,5 @@ function playSingleRecord(selectedRecord) {
 function playSelectedRecords(...records) {
 
 }
+
 window.addEventListener("keydown", recordingControl);
