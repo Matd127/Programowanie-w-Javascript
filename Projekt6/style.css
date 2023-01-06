@@ -1,3 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .field {
   position: relative;
   width: 500px;
@@ -24,4 +34,12 @@
   background: rgb(0, 0, 0);
   border-radius: 100%;
   z-index: 5;
+}
+.time__container{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+}
+.time{
+    margin-left: 2px;
 }
