@@ -30,7 +30,7 @@ body{
 
 
 .drumkit__buttons div{
-    width: 100px;
+    width: 60px;
     height: 100px;
     color: yellow;
     padding: 30px;
@@ -60,11 +60,11 @@ body{
 }
 
 .drumkit__recordButton{
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     padding: 30px;
     margin: 10px;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     border: 5px solid white;
     display: flex;
     justify-content: center;
@@ -72,14 +72,15 @@ body{
     border-radius: 5px;
     color: white;
     background-color: rgba(255, 0, 0, 0.384);
+    text-align: center;
 }
 
 .drumkit__playButton{
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     padding: 30px;
     margin: 10px;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     border: 5px solid white;
     display: flex;
     justify-content: center;
@@ -88,4 +89,30 @@ body{
     border-radius: 5px;
     color: white;
     background-color: rgba(199, 140, 13, 0.384);
+    text-align: center;
+}
+.tracks{
+    margin-top: 1rem;
+    width: 75vw;
+}
+.track{
+    color: white;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1),
+    1px 1px 3px rgba(0, 0, 0, 0.8);
+    font-size: 1.2rem
+}
+.play{
+    cursor: pointer;
+}
+.tracks div{
+    margin: 1rem
+}
+.play__track{
+    display: flex;
+    justify-content: center;
 }
