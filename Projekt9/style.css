@@ -1,13 +1,18 @@
-body{
-    background-color: rgb(76, 216, 255);
+*{
     box-sizing: border-box;
+}
+
+body{
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(70,223,252,1) 100%);
     margin: 0;
 }
 header{
     display: flex;
     flex-direction: row;
     margin-left: auto;
-    background-color: rgba(41, 40, 40, 0.366);
+    background: transparent;
+    background: rgba(0, 0, 0, 0.253);
     color: rgb(255, 255, 255);
 }
 
