@@ -1,10 +1,12 @@
 *{
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body{
-    background: rgb(63,94,251);
+     background: rgb(63,94,251);
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(70,223,252,1) 100%);
+
     margin: 0;
 }
 header{
@@ -20,18 +22,73 @@ h1 {
     padding: 15px;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 15px;
-    overflow: hidden;
+section{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start; 
+    flex-wrap: wrap;
+    width: 80%;
+    /* display: grid;
+	grid-gap: 0.5rem;
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(15vw, 1fr)
+	); */
 }
 
-li{
-    display: block;
+.weather-field{
+    position: relative;
+    padding: 1rem;
+    margin: 0.2rem;
+    /* margin: auto; */
+    width: 300px;
+    height: 300px;
+
+    border-radius: 10px;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.weathers{
+    margin-top: 20px;
+}
+
+.search-menu{
+    display: flex;
+    align-items: center;
+}
+
+input[type='text']{
+    border: 0;
+    background-color: rgba(0, 0, 0, 0.103);
+    color: white;
+    height: 35px;
+    width: 30vw;
+    border-radius: 10px;
+    border: 0.5px solid rgba(0, 5, 78, 0.075)
+}
+input[type='text']:focus{
+    outline: none;
+}
+::placeholder{
     color: white;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
+}
+
+.find{
+    background-color: rgba(0, 0, 0, 0.103);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: 80px;
+}
+
+.find:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.342);
+}
