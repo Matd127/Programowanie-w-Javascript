@@ -1,109 +1,87 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d')
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth * 0.5;
-canvas.height = window.innerHeight * 0.5
+canvas.height = window.innerHeight * 0.5;
 
-// window.addEventListener('resize', () => {
-//     canvas.width = window.innerWidth * 0.5;
-//     canvas.height = window.innerHeight * 0.5
-// })
+const balls = [];
+const defaultnoOfBalls = 100;
+const defaultDistance = 100;
+let distance = 0;
+const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-// const mouse = {
-//     x: undefined,
-//     y: undefined
-// }
-// canvas.addEventListener('click', (e) => {
-//     mouse.x = e.x;
-//     mouse.y = e.y;
-// })
+class Ball {
+  constructor() {
+    this.x = canvas.width / 2 + random(-30, 30);
+    this.y = Math.random() * canvas.height;
+    this.radius = random(5, 20);
+    this.speedX = Math.random() * 3 - 1.5;
+    this.speedY = Math.random() * 3 - 1.5;
+  }
+}
 
-// const particleArr = [];
+const init = () => {
+  balls.length = 0;
+  let ballsFromInput = +document.querySelector(".ballsInput").value;
+  distance = +document.querySelector(".distance").value;
 
-// class Particle{
-//     constructor(){
-//         this.x = canvas.width / 2
-//         this.y = canvas.height / 2
-//         this.size = Math.random() * 20 + 1 //Rozmiar kulek?
-//         this.speedX = Math.random() * 3 - 1.5 //Szybkość kulek po osi x?
-//         this.speedY = Math.random() * 3 - 1.5 //Szybkość kulek po osi y?
-//     }
-//     update(){
-//         this.x += this.speedX;
-//         this.y += this.speedY;
+  if (!ballsFromInput) ballsFromInput = defaultnoOfBalls;
+  if (!distance) distance = defaultDistance;
 
-//         if(this.x + this.speedX > canvas.width - this.size ||
-//             this.x + this.speedX < this.size) {
-//                 this.speedX = this.speedX;
-//         }
-        
-//         if(this.y + this.speedY > canvas.height - this.size ||
-//             this.y + this.speedY < this.size){
-//                 this.speedY = this.speedY
-//         }
-               
-//     }
-//     draw(){
-//         ctx.beginPath();
-//         ctx.fillStyle = "white"
-//         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-//         ctx.fill();
-//         ctx.closePath();
-//     }
-// }
+  for (let i = 0; i < ballsFromInput; i++) balls.push(new Ball());
+};
+const startBtn = document
+  .querySelector(".start")
+  .addEventListener("click", init);
+const resetBtn = document
+  .querySelector(".reset")
+  .addEventListener("click", () => {
+    balls.length = 0;
+    document.querySelector(".ballsInput").value = '';
+    document.querySelector(".distance").value = ''
+  });
 
-// function init() {
-//     for(let i = 0; i < 10; i++ ){
-//         particleArr.push(new Particle())
-//     }
-// }
-// init();
+const ballsConnection = (balls, dist) => {
+  balls.forEach((ball1, index) => {
+    balls.slice(index + 1).forEach((ball2) => {
+      const distance = Math.sqrt(
+        (ball1.x - ball2.x) ** 2 + (ball1.y - ball2.y) ** 2
+      );
+      if (distance < dist) {
+        ctx.beginPath();
+        ctx.moveTo(ball1.x, ball1.y);
+        ctx.lineWidth = 1;
+        ctx.lineTo(ball2.x, ball2.y);
+        ctx.stroke();
+      }
+    });
+  });
+};
 
-// function handle(){
-//     for(let i = 0; i < particleArr.length; i++){
-//         particleArr[i].draw();
-//         particleArr[i].update();
-//     }
-// }
+const draw = function () {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  balls.forEach(function (ball) {
+    ball.x += ball.speedX;
+    ball.y += ball.speedY;
 
-// function animate() {
-//     ctx.clearRect(0, 0, canvas.width, canvas.height)
-//     handle();
-//     requestAnimationFrame(animate)
-// }
+    if (ball.x < 0 || ball.x > canvas.width) {
+      ball.speedX *= -1;
+    }
+    if (ball.y < 0 || ball.y > canvas.height) {
+      ball.speedY *= -1;
+    }
 
-// animate();
-
-const ballRadius = 10;
-let x = canvas.width/2;
-let y = canvas.height-30;
-let dx = 2;
-let dy = -2;
-
-function drawBall(x, y) {
     ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 3;
+    ctx.strokeRect = (20, 20, 80, 100);
+    ctx.stroke();
     ctx.fill();
-    ctx.closePath();
-}
+  });
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall(x, y);
-    drawBall(x - 20, y + 60);
-    // drawBall(x + 40, y + 40);
-    // drawBall(x + 60, y + 60);
-
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-    }
-    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
-        dy = -dy;
-    }
-    
-    x += dx;
-    y += dy;
-}
-
-setInterval(draw, 15);
+  ballsConnection(balls, distance);
+  requestAnimationFrame(draw);
+};
+draw();
