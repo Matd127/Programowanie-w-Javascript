@@ -1,94 +1,123 @@
-*{
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body{
-     background: rgb(63,94,251);
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(70,223,252,1) 100%);
-
-    margin: 0;
+body {
+  background: rgb(63, 94, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(70, 223, 252, 1) 100%
+  );
+  margin: 0;
 }
-header{
+header {
+  margin-left: auto;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.253);
+  color: rgb(255, 255, 255);
+}
+header .menu {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.menu h1 {
+  padding: 15px;
+}
+
+section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.weather-field {
+  position: relative;
+  padding: 1rem;
+  margin: 0.2rem;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.weathers {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.search-menu {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"] {
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.103);
+  color: white;
+  height: 35px;
+  width: 30vw;
+  border-radius: 10px;
+  border: 0.5px solid rgba(0, 5, 78, 0.075);
+}
+input[type="text"]:focus {
+  outline: none;
+}
+::placeholder {
+  color: white;
+  text-align: center;
+}
+
+.find_btn {
+  background-color: rgba(0, 0, 0, 0.103);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: 80px;
+}
+
+.find_btn:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.342);
+}
+
+.temp {
+  font-size: 60px;
+}
+
+.temp-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.temps {
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
-    margin-left: auto;
-    background: transparent;
-    background: rgba(0, 0, 0, 0.253);
-    color: rgb(255, 255, 255);
-}
-
-h1 {
-    padding: 15px;
-}
-
-section{
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start; 
-    flex-wrap: wrap;
-    width: 80%;
-    /* display: grid;
-	grid-gap: 0.5rem;
-	grid-template-columns: repeat(
-		auto-fill,
-		minmax(15vw, 1fr)
-	); */
-}
-
-.weather-field{
-    position: relative;
-    padding: 1rem;
-    margin: 0.2rem;
-    /* margin: auto; */
-    width: 300px;
-    height: 300px;
-
-    border-radius: 10px;
-
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.weathers{
-    margin-top: 20px;
-}
-
-.search-menu{
-    display: flex;
-    align-items: center;
-}
-
-input[type='text']{
-    border: 0;
-    background-color: rgba(0, 0, 0, 0.103);
-    color: white;
-    height: 35px;
-    width: 30vw;
-    border-radius: 10px;
-    border: 0.5px solid rgba(0, 5, 78, 0.075)
-}
-input[type='text']:focus{
-    outline: none;
-}
-::placeholder{
-    color: white;
+    justify-content: center;
     text-align: center;
 }
 
-.find{
-    background-color: rgba(0, 0, 0, 0.103);
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    width: 80px;
-}
-
-.find:hover{
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.342);
+.temps h3{
+    padding: 0px;
+    margin: 5px;
+    font-size: 25px;
 }
