@@ -10,36 +10,63 @@
   <body>
     <div class="container">
       <div class="header">
-          <span><h1>Notatki</h1></span>
-          <button class="add-note">+ Dodaj notatkę</button>
+        <span><h1>Notatki</h1></span>
+        <button class="add-note">+ Dodaj notatkę</button>
       </div>
       <div class="note-search">
-        <input type="text" placeholder="Szukaj po tagu">
+        <input type="text" placeholder="Szukaj po tagu" />
       </div>
       <div class="notes-list"></div>
 
       <div class="form hidden">
         <form>
-          <h1>Nowa notatka</h1>
-          <input type="text" name="title" placeholder="Tytuł notatki" />
-          <textarea placeholder="Treść notatki"></textarea>
-          <input type="text" name="tags" placeholder="Podaj tagi po spacji" />
-          <div>
-            Wybierz kolor: <input type="color" value="#ffffff">
+          <div class="header"><h1>Nowa notatka</h1></div>
+        <div class="content">
+          <div class="row">
+            <label>Tytuł notatki</label>
+            <input type="text" name="title" placeholder="Tytuł notatki" />
           </div>
-          <button id="submit" class="add-note">Dodaj notatkę</button>
+          <div class="row">
+            <label>Treść notatki</label>
+            <textarea></textarea>
+          </div>
+          <div class="row">
+            <label>Tagi (po spacji)</label>
+            <input type="text" name="tags" placeholder="Podaj tagi po spacji" />
+          </div>
+          <div class="row">
+            Wybierz kolor: <input type="color" value="#ffffff" />
+          </div>
+          <div class="row">
+            <button id="submit" class="add-note">Dodaj notatkę</button>
+          </div>
+        </div>
         </form>
       </div>
 
       <div class="edit-form hidden">
         <form>
-          <h1>Edycja notatki</h1>
-          <input type="text" name="title" placeholder="Tytuł notatki" />
-          <textarea placeholder="Treść notatki"></textarea>
-          <div>
-            Wybierz kolor: <input type="color">
+          <div class="header"><h1>Edycja notatki</h1></div>
+          <div class="content">
+            <div class="row">
+              <label>Tytuł notatki</label>
+              <input type="text" name="title" placeholder="Tytuł notatki" />
+            </div>
+            <div class="row">
+              <label>Treść notatki</label>
+              <textarea></textarea>
+            </div>
+            <div class="row">
+              <label>Tagi (po spacji)</label>
+              <input type="text" name="tags" placeholder="Podaj tagi po spacji" />
+            </div>
+            <div class="row">
+              Wybierz kolor: <input type="color" value="#ffffff" />
+            </div>
+            <div class="row">
+              <button class="edit-note">Edytuj notatkę</button>
+            </div>
           </div>
-          <button class="edit-note">Edytuj notatkę</button>
         </form>
       </div>
     </div>

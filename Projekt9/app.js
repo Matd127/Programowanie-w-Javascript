@@ -1,8 +1,6 @@
 let weathers = [];
 const weathersMenu = document.querySelector(".weathers");
-const findBtn = document
-  .querySelector(".find_btn")
-  .addEventListener("click", getWeatherData);
+const findBtn = document.querySelector(".find_btn").addEventListener("click", getWeatherData);
 const API_KEY = `c4cb964e4b660ef9aa5765152901bc41`;
 
 const loadWeathers = () => {
@@ -45,9 +43,9 @@ function getWeatherData() {
   if (weathers.length === 10) {
     alert("Przekroczono liczbe miejscowości");
   } else {
-    const city = document.querySelector(".city").value;
+    const city = document.querySelector(".city");
     const weather = {};
-    getDataFromAPI(weather, city, "add")
+    getDataFromAPI(weather, city.value, "add")
     city.value = ''
   }
 }

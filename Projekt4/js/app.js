@@ -11,6 +11,11 @@ function returnDate(date) {
   return `${day}/${month}/${year}`;
 }
 
+const toggleEditForm = () => {
+  editForm.classList.toggle("hidden");
+  editOverlay.classList.toggle("hidden");
+};
+
 const displayNotes = (notes) => {
   notesList.innerHTML = "";
 
@@ -22,15 +27,18 @@ const displayNotes = (notes) => {
     const newNote = document.createElement("div");
     newNote.classList.add("note");
     newNote.style.backgroundColor = note.color;
-    newNote.innerHTML = `<div class='manage-icons'> 
+    newNote.innerHTML = 
+    `<div class='manage-icons'> 
       <div class='edit-button'>📜</div> 
       <div class='delete-button'>&#10060;</div> 
     </div>
     <div class='pin-icon'>${note.pin ? "🔴" : "⚪"}</div>
-    <h1>${note.title}</h1> 
-    <div class="note--content">
-      <div class="note--tags">Tagi: ${note.tags} </div>
-      ${note.content}
+    <div>
+      <h1>${note.title}</h1> 
+      <div class="note--content">
+        <div class="note--tags">Tagi: ${note.tags} </div>
+        ${note.content}
+    </div>
     </div>
     <div class="note--date">Data utworzenia: ${returnDate(new Date(note.dateOfCreation))}
    <div>`;
@@ -77,14 +85,16 @@ const toggleEditMenu = function (id) {
   const singleNote = notes.find((note) => note.id === Number(id));
   console.log(singleNote);
   loadValuesToForm(singleNote);
-  document.querySelector(".edit-note").addEventListener("click", () => {
+
+  document.querySelector(".edit-note").addEventListener("click", function() {
     editNote(singleNote);
   });
-  document.querySelector("form").reset();
-  displayNotes(notes);
+  displayNotes(notes);  
+
 };
 
 const editNote = function (newNote) {
+  console.log('done')
   newNote.title = editForm.querySelector('input[name="title"]').value;
   newNote.content = editForm.querySelector("textarea").value;
   newNote.color = editForm.querySelector('input[type="color"]').value;
@@ -100,7 +110,6 @@ addNote.addEventListener("click", (e) => {
   const note = new Note(Date.now(), title, content, color, false, tags, Date.now());
   notes.push(note);
   localStorage.setItem("notes", JSON.stringify(notes));
-  document.querySelector("form").reset();
   toggleForm();
   displayNotes(notes);
 });
@@ -117,10 +126,7 @@ noteSearchTag.addEventListener("input", function (e) {
   }, 500);
 });
 
-const toggleEditForm = () => {
-  editForm.classList.toggle("hidden");
-  editOverlay.classList.toggle("hidden");
-};
+
 
 const toggleForm = () => {
   form.classList.toggle("hidden");
