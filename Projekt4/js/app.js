@@ -27,8 +27,7 @@ const displayNotes = (notes) => {
     const newNote = document.createElement("div");
     newNote.classList.add("note");
     newNote.style.backgroundColor = note.color;
-    newNote.innerHTML = 
-    `<div class='manage-icons'> 
+    newNote.innerHTML = `<div class='manage-icons'> 
       <div class='edit-button'>📜</div> 
       <div class='delete-button'>&#10060;</div> 
     </div>
@@ -40,12 +39,18 @@ const displayNotes = (notes) => {
         ${note.content}
     </div>
     </div>
-    <div class="note--date">Data utworzenia: ${returnDate(new Date(note.dateOfCreation))}
+    <div class="note--date">Data utworzenia: ${returnDate(
+      new Date(note.dateOfCreation)
+    )}
    <div>`;
 
     const notePin = newNote.querySelector(".pin-icon");
-    newNote.querySelector(".delete-button").addEventListener("click", () => deleteNote(note.id));
-    newNote.querySelector(".edit-button").addEventListener("click", () => toggleEditMenu(note.id));
+    newNote
+      .querySelector(".delete-button")
+      .addEventListener("click", () => deleteNote(note.id));
+    newNote
+      .querySelector(".edit-button")
+      .addEventListener("click", () => toggleEditMenu(note.id));
     notePin.addEventListener("click", () => pinNote(note, notePin));
     notesList.appendChild(newNote);
   });
@@ -77,6 +82,7 @@ const deleteNote = function (id) {
 const loadValuesToForm = (note) => {
   editForm.querySelector('input[name="title"]').value = note.title;
   editForm.querySelector("textarea").value = note.content;
+  editForm.querySelector('input[name="tags"]').value = String(note.tags).replaceAll(",", " ");
   editForm.querySelector(`input[type="color"]`).value = note.color;
 };
 
@@ -86,17 +92,16 @@ const toggleEditMenu = function (id) {
   console.log(singleNote);
   loadValuesToForm(singleNote);
 
-  document.querySelector(".edit-note").addEventListener("click", function() {
+  document.querySelector(".edit-note").addEventListener("click", function () {
     editNote(singleNote);
   });
-  displayNotes(notes);  
-
+  displayNotes(notes);
 };
 
 const editNote = function (newNote) {
-  console.log('done')
   newNote.title = editForm.querySelector('input[name="title"]').value;
   newNote.content = editForm.querySelector("textarea").value;
+  newNote.tags = editForm.querySelector('input[name="tags"]').value;
   newNote.color = editForm.querySelector('input[type="color"]').value;
   localStorage.setItem("notes", JSON.stringify(notes));
 };
@@ -107,7 +112,15 @@ addNote.addEventListener("click", (e) => {
   const content = document.querySelector("textarea").value;
   const color = document.querySelector('input[type="color"]').value;
   const tags = document.querySelector('input[name="tags"]').value.split(" ");
-  const note = new Note(Date.now(), title, content, color, false, tags, Date.now());
+  const note = new Note(
+    Date.now(),
+    title,
+    content,
+    color,
+    false,
+    tags,
+    Date.now()
+  );
   notes.push(note);
   localStorage.setItem("notes", JSON.stringify(notes));
   toggleForm();
@@ -117,16 +130,15 @@ addNote.addEventListener("click", (e) => {
 noteSearchTag.addEventListener("input", function (e) {
   let filteredNotes;
   setTimeout(() => {
-    if (e.target.value === "") 
-      displayNotes(notes);
+    if (e.target.value === "") displayNotes(notes);
     else {
-      filteredNotes = notes.filter((note) => note.tags.includes(e.target.value));
+      filteredNotes = notes.filter((note) =>
+        note.tags.includes(e.target.value)
+      );
       displayNotes(filteredNotes);
     }
   }, 500);
 });
-
-
 
 const toggleForm = () => {
   form.classList.toggle("hidden");

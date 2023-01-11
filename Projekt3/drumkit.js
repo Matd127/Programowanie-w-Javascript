@@ -61,14 +61,19 @@ function onKeyPress(e) {
   const sound = document.querySelector(`audio[data-key='${e.keyCode}']`);
   if (sound && isRecording) 
     recordSound(sound);
+
+  const play = document.querySelector(`audio[data-key='${e.keyCode}']`);
+  if(play){
+    console.log(play)
+  }
+
 }
 
 function displayRecord(record) {
   const track = document.createElement('div');
   track.classList.add('track')
   track.innerHTML = 
-  `Play <input class="pl" type="checkbox">
-  <div>Track ${record}
+  `<div>Track ${record}
       <span class="play">▶</div>
   </div>`
 
@@ -98,6 +103,13 @@ function recordingControl(event) {
   }
 }
 
+function playRecordOnKey(e){
+  if(e.keyCode === Number(PLAYING_KEY)){
+    console.log(e)
+    playRecord();
+  }
+}
+
 function playRecord(){
   for(const [record, timeout] of records.flat()){
     setTimeout(() => {
@@ -118,9 +130,9 @@ function playSingleRecord(selectedRecord) {
 }
 
 //Play Selected
-
 function playSelectedRecords(...records) {
-
+  //Brak juz czasu :(
 }
 
 window.addEventListener("keydown", recordingControl);
+window.addEventListener("keydown", playRecordOnKey);

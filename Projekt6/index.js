@@ -2,7 +2,12 @@ window.addEventListener("deviceorientation", onDeviceMove);
 const ball = document.querySelector(".ball");
 const field = document.querySelector(".field");
 const timeClock = document.querySelector(".time");
+const scores = document.querySelector(".scores");
+
+const scoreBoard = document.querySelector(".score-board");
+const scoreBoardBtn = document.querySelector(".score-board-btn");
 let records = [];
+let game = false;
 
 const maxX = field.clientWidth - ball.clientWidth;
 const maxY = field.clientHeight - ball.clientHeight;
@@ -28,11 +33,19 @@ function startTimer() {
   const timer = setInterval(tick, 1000);
   return timer;
 }
+
+function stopTimer() {
+  clearInterval(timer);
+}
+
 let timer;
 
 function initGame() {
-  //Zmienić na 10 po zakończonych testach
-  for (let i = 0; i < 1; i++) {
+  field.classList.remove("hidden");
+  scoreBoard.classList.add("hidden");
+
+  game = true;
+  for (let i = 0; i < 10; i++) {
     genetateHole(field.clientWidth - 40, field.clientHeight - 40);
   }
   timer = startTimer();
@@ -73,8 +86,10 @@ function displayRecords(records) {
     sortRecords(records);
   }
 
+  if (records.length > 5) records.length = 5;
+
   records.forEach((record, index) => {
-    output += `${index + 1} : ${record} \n`;
+    output += `<span>${index + 1} : ${record}</span>`;
   });
   return output;
 }
@@ -93,15 +108,24 @@ function onDeviceMove(e) {
   ball.style.top = `${(maxY * y) / 180}px`;
   ball.style.left = `${(maxX * x) / 180}px`;
 
-  if (holes.length === 0) {
+  if (holes.length === 0 && game) {
     records.push(timeClock.textContent);
-    clearInterval(timer);
-    alert(
-      `Koniec gry! twój czas to: ${
-        timeClock.textContent
-      } \n Rekordy: ${displayRecords(records)}`
-    );
-    initGame();
+    game = false;
+    stopTimer();
+    field.classList.add("hidden");
+    scoreBoard.classList.remove("hidden");
+    scoreBoardBtn.addEventListener("click", initGame);
+
+    //Stack?
+    // scoreBoardBtn.addEventListener('click', function() {
+    //   i++;
+    //   console.log(i)
+    //   field.classList.remove('hidden')
+    //   scoreBoard.classList.add('hidden');
+    //   initGame();
+    // })
+
+    scores.innerHTML = displayRecords(records);
   }
 
   holes.forEach((hole) => {

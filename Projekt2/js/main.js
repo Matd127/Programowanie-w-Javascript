@@ -94,8 +94,10 @@ slideImages.forEach(function (image) {
   image.addEventListener("click", () => {
     toggleImg();
     imgResized.textContent = ''
+
     clearInterval(intervalRef)
     intervalRef = undefined;
+    
     const src = image.getAttribute("src")
     const img = document.createElement('img');
     img.setAttribute("alt", "slide_image")

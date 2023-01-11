@@ -11,7 +11,7 @@ const sum = () => {
             count+= parseInt(inputs[i].value);
     }
     const text = document.querySelector('#resultsOfSum')
-    text.innerText = `Suma: ${count}`
+    text.textContent = `Suma: ${count}`
 }
 
 const average = () => {
@@ -25,7 +25,7 @@ const average = () => {
     }
     const avg = sum / count
     const text = document.querySelector('#resultsOfDifference')
-    text.innerText = `Średnia: ${avg}`
+    text.textContent = `Średnia: ${avg}`
 }
 
 const minimal = () => {
@@ -35,7 +35,7 @@ const minimal = () => {
             arr.push(parseInt(inputs[i].value))
     }
     const text = document.querySelector('#resultsMinimal')
-    text.innerText = `Minimum: ${Math.min(...arr)}`
+    text.textContent = `Minimum: ${Math.min(...arr)}`
 }
 
 const maximal = () => {
@@ -45,7 +45,7 @@ const maximal = () => {
             arr.push(parseInt(inputs[i].value))
     }
     const text = document.querySelector('#resultsMaximal')
-    text.innerText = `Maksimum: ${Math.max(...arr)}`
+    text.textContent = `Maksimum: ${Math.max(...arr)}`
 }
 
 const calc = () => {
